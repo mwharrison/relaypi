@@ -1,7 +1,9 @@
 import RPi.GPIO as GPIO
 from time import sleep
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
+
 from models import Relay
 
 def control(request, relay_id):
@@ -17,4 +19,7 @@ def control(request, relay_id):
 	#return relay to orginial state
 	GPIO.cleanup()
 	
-	return render(request, 'relay.html', locals()) 
+	#send success message
+	messages.add_message(request, messages.SUCCESS, '%s was triggered successfully' % relay.name)
+	
+	return redirect('/')
