@@ -5,8 +5,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'relaypi.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
+    url(r'^$', 'relaypi.views.home', name='home'),
+    url(r'^relay/(?P<relay_id>\d+)/$', 'hardware.views.control', name='control'),
 
     url(r'^admin/', include(admin.site.urls)),
 )
